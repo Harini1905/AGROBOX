@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroBox Monitor - Precision Agriculture System</title>
+    <meta name="description" content="Real-time monitoring dashboard for precision agriculture plant growth system with automated moisture, light, and temperature control">
+    <meta name="author" content="AgroBox">
+    
+    <meta property="og:title" content="AgroBox Monitor - Precision Agriculture System">
+    <meta property="og:description" content="Real-time monitoring dashboard for precision agriculture plant growth system">
+    <meta property="og:type" content="website">
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2c-1.1 0-2 .9-2 2v1c0 1.1.9 2 2 2s2-.9 2-2V4c0-1.1-.9-2-2-2zm-4 7c-1.1 0-2 .9-2 2v1c0 1.1.9 2 2 2s2-.9 2-2v-1c0-1.1-.9-2-2-2zm8 0c-1.1 0-2 .9-2 2v1c0 1.1.9 2 2 2s2-.9 2-2v-1c0-1.1-.9-2-2-2zM5 16c-1.1 0-2 .9-2 2v1c0 1.1.9 2 2 2s2-.9 2-2v-1c0-1.1-.9-2-2-2zm14 0c-1.1 0-2 .9-2 2v1c0 1.1.9 2 2 2s2-.9 2-2v-1c0-1.1-.9-2-2-2zM12 9c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/>
+                </svg>
+                <h1 class="header-title">AgroBox Monitor</h1>
+            </div>
+            <p class="header-subtitle">
+                <svg class="activity-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                Precision Agriculture Growth System - Live Dashboard
+            </p>
+        </header>
+
+        <!-- Sensor Cards -->
+        <div class="sensor-grid">
+            <!-- Moisture Card -->
+            <div class="sensor-card" data-sensor="moisture">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="sensor-info">
+                            <div class="icon-container">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="sensor-title">Soil Moisture</h3>
+                                <div class="sensor-value-container">
+                                    <span class="sensor-value" id="moisture-value">45.0</span>
+                                    <span class="sensor-unit">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="status-badge" id="moisture-status">optimal</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="moisture-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Light Card -->
+            <div class="sensor-card" data-sensor="light">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="sensor-info">
+                            <div class="icon-container">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="sensor-title">Light Intensity</h3>
+                                <div class="sensor-value-container">
+                                    <span class="sensor-value" id="light-value">650.0</span>
+                                    <span class="sensor-unit">lux</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="status-badge" id="light-status">optimal</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="light-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Temperature Card -->
+            <div class="sensor-card" data-sensor="temperature">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="sensor-info">
+                            <div class="icon-container">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="sensor-title">Temperature</h3>
+                                <div class="sensor-value-container">
+                                    <span class="sensor-value" id="temperature-value">24.5</span>
+                                    <span class="sensor-unit">°C</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="status-badge" id="temperature-status">optimal</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="temperature-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Humidity Card -->
+            <div class="sensor-card" data-sensor="humidity">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <div class="sensor-info">
+                            <div class="icon-container">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="sensor-title">Humidity</h3>
+                                <div class="sensor-value-container">
+                                    <span class="sensor-value" id="humidity-value">60.0</span>
+                                    <span class="sensor-unit">%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="status-badge" id="humidity-status">optimal</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="humidity-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-card">
+            <h2 class="controls-title">System Controls</h2>
+            <div class="controls-grid">
+                <!-- Water Pump Control -->
+                <div class="control-item">
+                    <div class="control-info">
+                        <div class="status-indicator" id="pump-indicator"></div>
+                        <div>
+                            <label class="control-label">Water Pump</label>
+                            <div class="mode-badges">
+                        <button class="mode-badge active" data-control="pump" data-mode="auto">Auto</button>
+                    </div>
+                        </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="pump-switch">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- UV Lamp Control -->
+                <div class="control-item">
+                    <div class="control-info">
+                        <div class="status-indicator" id="uvlamp-indicator"></div>
+                        <div>
+                            <label class="control-label">UV Lamp</label>
+                            <div class="mode-badges">
+                        <button class="mode-badge active" data-control="uvLamp" data-mode="auto">Auto</button>
+                    </div>
+                        </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="uvlamp-switch">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+
+                <!-- Peltier Control -->
+                <div class="control-item">
+                    <div class="control-info">
+                        <div class="status-indicator" id="peltier-indicator"></div>
+                        <div>
+                            <label class="control-label" id="peltier-label">Peltier (Cooling)</label>
+                            <div class="mode-badges">
+                        <button class="mode-badge active" data-control="peltier" data-mode="auto">Auto</button>
+                    </div>
+                        </div>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="peltier-switch">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
